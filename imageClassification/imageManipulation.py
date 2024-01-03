@@ -15,5 +15,6 @@ for folder in os.listdir(data_dir):
             extention = imghdr.what(image_path) # retrives file type
             if extention not in vaild_extention:
                 print(f"file : {image} is not of vaild file type ({vaild_extention})")
+                os.remove(image_path)
         except Exception as e:
             print(f"exception: {e} \n raised on image: {image} in {folder_path}")
