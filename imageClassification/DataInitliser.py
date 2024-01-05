@@ -40,15 +40,15 @@ class data_initliser():
         return self.class_names
     
     def display_classes_training(self,width:int = 10,height:int=10):
-        
         #makes a 4x4 grid
+        #TODO make this dynamic
         num_of_classes = len(self.get_class_names())
         plt.figure(figsize=(width,height))
         for images, labels in self.train_data.take(1):
             for i in range(16):
                 ax = plt.subplot(4,4 ,i+ 1)
                 plt.imshow(images[i].numpy().astype("uint8"))
-                plt.title(class_names[labels[i]])
+                plt.title(self.get_class_names()[labels[i]])
                 plt.axis("off")
         plt.show()
         
@@ -68,12 +68,12 @@ class data_initliser():
         pass
     
 
-path = "data"
-# path = "..\data"
-image_loader = data_initliser(32,180,180,path,seed=78987)
-image_loader.train_data_load()
-image_loader.validation_data_load()
+# path = "data"
+# # path = "..\data"
+# image_loader = data_initliser(32,180,180,path,seed=78987)
+# image_loader.train_data_load()
+# image_loader.validation_data_load()
     
-class_names = image_loader.get_class_names()
-print(class_names)
-image_loader.display_classes_training(10,10)
+# class_names = image_loader.get_class_names()
+# print(class_names)
+# image_loader.display_classes_training(10,10)
