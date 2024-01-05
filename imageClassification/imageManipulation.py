@@ -1,7 +1,7 @@
 import cv2
 import imghdr
 import os
-# this file is used to clean up image data, removing bad images (currupted/inaccessable)
+# this file is used to clean up image data, removing bad images (currupted/inaccessable) from downloaded data online
 
 data_dir = "data" # points image directory 
 vaild_extention = ["jpeg","jpg","bmp","png"]
@@ -18,3 +18,4 @@ for folder in os.listdir(data_dir):
                 os.remove(image_path)
         except Exception as e:
             print(f"exception: {e} \n raised on image: {image} in {folder_path}")
+            
