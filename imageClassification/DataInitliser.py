@@ -58,6 +58,14 @@ class data_initliser():
         self.train_data = self.train_data.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE) # might need to cache in a file
         self.validation_data = self.validation_data.cache().prefetch(buffer_size=AUTOTUNE)
         
+    def set_data(self,img_path):
+        self.img_path = img_path
+        self.train_data_load()
+        self.validation_data_load()
+        
+    def get_data(self):
+        return [self.train_data,self.validation_data]
+        pass
     
 
 path = "data"
