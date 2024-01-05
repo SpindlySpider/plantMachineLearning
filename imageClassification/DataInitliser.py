@@ -3,8 +3,9 @@ import keras
 import numpy
 import matplotlib.pyplot as plt
 
-class data_loader():
+class data_initliser():
     def __init__(self,batch_size:int, width:int,height:int,path:str,vaildation_split:float = 0.2,seed:int = numpy.random.randint(1,10000)):
+        # note we handle image colour standardization in the actual model not here
         self.batch_size = batch_size
         self.width = width
         self.height = height
@@ -39,6 +40,7 @@ class data_loader():
         return self.class_names
     
     def display_classes_training(self,width:int = 10,height:int=10):
+        
         #makes a 4x4 grid
         num_of_classes = len(self.get_class_names())
         plt.figure(figsize=(width,height))
@@ -48,11 +50,19 @@ class data_loader():
                 plt.imshow(images[i].numpy().astype("uint8"))
                 plt.title(class_names[labels[i]])
                 plt.axis("off")
-    plt.show()
+        plt.show()
+        
+    def configure_performance(self):
+        #this uses caching functions to keep dataset in memory during first epoch
+        AUTOTUNE = tf.data.AUTOTUNE
+        self.train_data = self.train_data.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE) # might need to cache in a file
+        self.validation_data = self.validation_data.cache().prefetch(buffer_size=AUTOTUNE)
+        
     
 
-path = "..\data"
-image_loader = data_loader(32,180,180,path,seed=78987)
+path = "data"
+# path = "..\data"
+image_loader = data_initliser(32,180,180,path,seed=78987)
 image_loader.train_data_load()
 image_loader.validation_data_load()
     
