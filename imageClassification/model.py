@@ -6,13 +6,14 @@ class image_classifer():
         num_classes = num_of_classes
         # this is the architecture of the mode, change here if you want to implement YOLO
         self.model = Sequential([
-        layers.Rescaling(1./255,input_shape=(height,width,3)),
+        layers.Rescaling(1./255,input_shape=(height,width,3)), # adapts colour depth to be between 0 -> 1 
         layers.Conv2D(16,3,padding="same",activation="relu"),
         layers.MaxPooling2D(),
         layers.Conv2D(32,3,padding="same",activation="relu"),
         layers.MaxPooling2D(),
         layers.Conv2D(64,3,padding="same",activation="relu"),
         layers.MaxPooling2D(),
+        layers.Dropout(0.2), # reduces over fitting by setting a percetnage of outputs to 0 
         layers.Flatten(),
         layers.Dense(128,activation="relu"),
         layers.Dense(num_classes)
