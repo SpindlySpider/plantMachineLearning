@@ -35,5 +35,10 @@ classes = preprocesssing.get_class_names()
 # model.save_model("..\models","plantmodel.h5")
 model = image_classifer()
 model.load_model("..\models","plantmodel.h5")
-img = preprocesssing.get_processsed_img("rose.jpg",width,height)
-print(model.predict_model(img,classes))
+image = "flower.jpg"
+img = preprocesssing.get_processsed_img(image,width,height)
+prediction = model.predict_model(img,classes)
+if type(prediction) == str:
+    model.display_prediction(img,prediction)
+print(prediction)
+    
