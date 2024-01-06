@@ -2,7 +2,8 @@ from keras import *
 import matplotlib.pyplot as plt
 import os
 class image_classifer():
-    def __init__(self,height,width,num_of_classes):
+    
+    def set_architecture(self,height,width,num_of_classes):
         num_classes = num_of_classes
         data_augmentation = Sequential([
             layers.RandomFlip("horizontal",
