@@ -16,15 +16,11 @@ class data_initliser():
         self.height = height
         self.img_path = path
     
-    def get_processsed_img(self,path,width,height):
+    def get_processsed_img(self,path,width,height) -> numpy.ndarray:
         img = Image.open(path)
         img =img.resize((width,height))
-        plt.imshow(img)
-        plt.show()
         array_img = numpy.expand_dims(img,0) # resize it so it can be used in prediction/ training
-        
-        
-        return 
+        return array_img
     
     def train_data_load(self) -> list:
         train_data = keras.utils.image_dataset_from_directory(
@@ -47,7 +43,7 @@ class data_initliser():
             image_size=(self.height,self.width))
         self.validation_data = validation_data
         
-    def get_class_names(self):
+    def get_class_names(self)->list:
         self.class_names = self.train_data.class_names
         return self.class_names
     
