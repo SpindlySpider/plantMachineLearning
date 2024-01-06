@@ -45,6 +45,7 @@ class image_classifer():
             epochs=epochs
         )
     
+    
     def visulize_results(self):
         accuracy = self.history.history["accuracy"]
         validation_accuracy = self.history.history["val_accuracy"]
@@ -74,4 +75,8 @@ class image_classifer():
         path_filename = os.path.join(path,filename)       
         self.model = models.load_model(path_filename)
     def predict_model(self):
-        pass
+        self.model.predict(
+            self.training_data,
+            validation_data=self.vailidation_data,
+        )
+        
