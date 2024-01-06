@@ -4,16 +4,15 @@ import numpy
 import matplotlib.pyplot as plt
 
 class data_initliser():
-    def __init__(self,path:str,vaildation_split:float = 0.2,seed:int = numpy.random.randint(1,10000)):
+    def __init__(self,batch_size:int, width:int,height:int,path:str,vaildation_split:float = 0.2,seed:int = numpy.random.randint(1,10000)):
         # note we handle image colour standardization in the actual model not here
-        self.img_path = path
-        self.seed = seed
-        self.vaildation_split = vaildation_split
-    
-    def set_propaties(self,batch_size:int, width:int,height:int):
         self.batch_size = batch_size
         self.width = width
         self.height = height
+        self.img_path = path
+        self.seed = seed
+        self.vaildation_split = vaildation_split
+        
     
     def train_data_load(self) -> list:
         train_data = keras.utils.image_dataset_from_directory(
