@@ -2,17 +2,29 @@ import tensorflow as tf
 import keras
 import numpy
 import matplotlib.pyplot as plt
+from PIL import Image
 
 class data_initliser():
-    def __init__(self,batch_size:int, width:int,height:int,path:str,vaildation_split:float = 0.2,seed:int = numpy.random.randint(1,10000)):
+    def __init__(self,vaildation_split:float = 0.2,seed:int = numpy.random.randint(1,10000)):
         # note we handle image colour standardization in the actual model not here
+        self.seed = seed
+        self.vaildation_split = vaildation_split
+    
+    def set_proprties(self,batch_size:int, width:int,height:int,path:str):
         self.batch_size = batch_size
         self.width = width
         self.height = height
         self.img_path = path
-        self.seed = seed
-        self.vaildation_split = vaildation_split
+    
+    def get_processsed_img(self,path,width,height):
+        img = Image.open(path)
+        img =img.resize((width,height))
+        plt.imshow(img)
+        plt.show()
+        array_img = numpy.expand_dims(img,0) # resize it so it can be used in prediction/ training
         
+        
+        return 
     
     def train_data_load(self) -> list:
         train_data = keras.utils.image_dataset_from_directory(
@@ -58,6 +70,7 @@ class data_initliser():
         self.train_data = self.train_data.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE) # might need to cache in a file
         self.validation_data = self.validation_data.cache().prefetch(buffer_size=AUTOTUNE)
         
+    
     def set_data(self,img_path):
         self.img_path = img_path
         self.train_data_load()
