@@ -74,9 +74,21 @@ class image_classifer():
     def load_model(self,path,filename):
         path_filename = os.path.join(path,filename)       
         self.model = models.load_model(path_filename)
-    def predict_model(self):
-        self.model.predict(
-            self.training_data,
-            validation_data=self.vailidation_data,
-        )
-        
+    def predict_model(self,img, class_names:list = None):
+        #img is of type numpy.ndarray, and only works for one image at the moment
+        results = self.model.predict(img)
+        first_img = results[0] # must change this so it supports multiple images
+        if class_names != None:
+            index = 0
+            guess = max(first_img)
+            for result in first_img:
+                if guess == result:
+                    
+                    return class_names[index]
+                
+                else:
+                    index +=1
+            return results  
+        return results        
+
+
