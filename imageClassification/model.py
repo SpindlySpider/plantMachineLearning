@@ -1,6 +1,6 @@
-import tensorflow as tf
 from keras import *
 import matplotlib.pyplot as plt
+import os
 class image_classifer():
     def __init__(self,height,width,num_of_classes):
         num_classes = num_of_classes
@@ -43,6 +43,7 @@ class image_classifer():
             validation_data=self.vailidation_data,
             epochs=epochs
         )
+    
     def visulize_results(self):
         accuracy = self.history.history["accuracy"]
         validation_accuracy = self.history.history["val_accuracy"]
@@ -65,4 +66,9 @@ class image_classifer():
         plt.legend(loc='upper right')
         plt.title('Training and Validation Loss')
         plt.show()
-        
+    def save_model(self,path,filename):
+        path_filename = os.path.join(path,filename)        
+        self.model.save(path_filename)   
+    def load_model(self,path,filename):
+        path_filename = os.path.join(path,filename)        
+        self.model = self.model.load(path_filename)
