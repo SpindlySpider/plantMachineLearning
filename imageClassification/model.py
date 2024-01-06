@@ -71,5 +71,7 @@ class image_classifer():
         path_filename = os.path.join(path,filename)        
         self.model.save(path_filename)   
     def load_model(self,path,filename):
-        path_filename = os.path.join(path,filename)        
-        self.model = self.model.load(path_filename)
+        path_filename = os.path.join(path,filename)       
+        self.model = models.load_model(path_filename)
+    def predict_model(self):
+        pass
