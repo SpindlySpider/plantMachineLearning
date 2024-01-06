@@ -19,8 +19,9 @@ width = 250
 
 preprocesssing = data_initliser()
 preprocesssing.set_proprties(32,height,width,path)
-# preprocesssing.train_data_load()
+preprocesssing.train_data_load()
 # preprocesssing.validation_data_load()
+classes = preprocesssing.get_class_names()
 
 # num_of_classes = len(preprocesssing.get_class_names())
 # data = preprocesssing.get_data()
@@ -34,4 +35,5 @@ preprocesssing.set_proprties(32,height,width,path)
 # model.save_model("..\models","plantmodel.h5")
 model = image_classifer()
 model.load_model("..\models","plantmodel.h5")
-preprocesssing.get_processsed_img("rose.jpg",width,height)
+img = preprocesssing.get_processsed_img("rose.jpg",width,height)
+print(model.predict_model(img,classes))
