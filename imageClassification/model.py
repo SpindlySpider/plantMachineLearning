@@ -4,8 +4,14 @@ import matplotlib.pyplot as plt
 class image_classifer():
     def __init__(self,height,width,num_of_classes):
         num_classes = num_of_classes
+        data_augmentation = Sequential([
+            layers.RandomFlip("horizontal",
+                              input_shape=(height,width,3)),
+            layers.RandomRotation(0.1),
+            layers.RandomZoom(0.1)])
         # this is the architecture of the mode, change here if you want to implement YOLO
         self.model = Sequential([
+        data_augmentation,
         layers.Rescaling(1./255,input_shape=(height,width,3)), # adapts colour depth to be between 0 -> 1 
         layers.Conv2D(16,3,padding="same",activation="relu"),
         layers.MaxPooling2D(),
@@ -18,7 +24,6 @@ class image_classifer():
         layers.Dense(128,activation="relu"),
         layers.Dense(num_classes)
         ])
-        #
         self.model.compile(optimizer="adam",
                            loss=losses.SparseCategoricalCrossentropy(from_logits=True), 
                            #^ the loss function, from logit says that the model is not normalized
@@ -46,6 +51,8 @@ class image_classifer():
         validation_loss = self.history.history["val_loss"]
         
         epochs_range = range(self.epochs)
+        plt.figure(figsize=(8, 8))
+        plt.subplot(1, 2, 1)
          
         plt.plot(epochs_range, accuracy, label='Training Accuracy')
         plt.plot(epochs_range, validation_accuracy, label='Validation Accuracy')
@@ -58,3 +65,4 @@ class image_classifer():
         plt.legend(loc='upper right')
         plt.title('Training and Validation Loss')
         plt.show()
+        
