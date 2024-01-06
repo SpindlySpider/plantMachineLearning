@@ -31,4 +31,5 @@ width = 250
 
 # model.visulize_results()
 # model.save_model("..\models","plantmodel.h5")
-# model = image_classifer(height,width,num_of_classes).save_model("..\models","plantmodel.h5")
+model = image_classifer().load_model("..\models","plantmodel.h5")
+model.display_classes_training()
