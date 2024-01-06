@@ -17,7 +17,8 @@ path = "..\data"
 height = 250
 width = 250
 
-# preprocesssing = data_initliser(32,height,width,path)
+preprocesssing = data_initliser()
+preprocesssing.set_proprties(32,height,width,path)
 # preprocesssing.train_data_load()
 # preprocesssing.validation_data_load()
 
@@ -31,5 +32,6 @@ width = 250
 
 # model.visulize_results()
 # model.save_model("..\models","plantmodel.h5")
-model = image_classifer().load_model("..\models","plantmodel.h5")
-model.display_classes_training()
+model = image_classifer()
+model.load_model("..\models","plantmodel.h5")
+preprocesssing.get_processsed_img("rose.jpg",width,height)
