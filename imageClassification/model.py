@@ -1,6 +1,8 @@
 from keras import *
 import matplotlib.pyplot as plt
 import os
+import numpy
+from PIL import Image
 class image_classifer():
     
     def set_architecture(self,height,width,num_of_classes):
@@ -45,7 +47,14 @@ class image_classifer():
             epochs=epochs
         )
     
-    
+    def display_prediction(self,img:numpy.ndarray,label):
+        #this only works with one image 
+        image = numpy.squeeze(img)
+        img = Image.fromarray(image)
+        plt.imshow(img)
+        plt.title(label)
+        plt.show()
+        pass
     def visulize_results(self):
         accuracy = self.history.history["accuracy"]
         validation_accuracy = self.history.history["val_accuracy"]
@@ -74,7 +83,7 @@ class image_classifer():
     def load_model(self,path,filename):
         path_filename = os.path.join(path,filename)       
         self.model = models.load_model(path_filename)
-    def predict_model(self,img, class_names:list = None):
+    def predict_model(self,img, class_names:list = None)-> str|list:
         #img is of type numpy.ndarray, and only works for one image at the moment
         results = self.model.predict(img)
         first_img = results[0] # must change this so it supports multiple images
@@ -83,8 +92,8 @@ class image_classifer():
             guess = max(first_img)
             for result in first_img:
                 if guess == result:
-                    
-                    return class_names[index]
+                    prediction_label =class_names[index]
+                    return prediction_label
                 
                 else:
                     index +=1
