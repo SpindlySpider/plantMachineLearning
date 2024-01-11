@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 class data_initliser():
+    """this class is used for preparing and loading data from a directory"""
     def __init__(self,vaildation_split:float = 0.2,seed:int = numpy.random.randint(1,10000)):
         # note we handle image colour standardization in the actual model not here
         self.seed = seed
@@ -17,6 +18,7 @@ class data_initliser():
         self.img_path = path
     
     def get_processsed_img(self,path,width,height) -> numpy.ndarray:
+        
         img = Image.open(path)
         img =img.resize((width,height))
         array_img = numpy.expand_dims(img,0) # resize it so it can be used in prediction/ training
@@ -77,12 +79,3 @@ class data_initliser():
         pass
     
 
-# path = "data"
-# # path = "..\data"
-# image_loader = data_initliser(32,180,180,path,seed=78987)
-# image_loader.train_data_load()
-# image_loader.validation_data_load()
-    
-# class_names = image_loader.get_class_names()
-# print(class_names)
-# image_loader.display_classes_training(10,10)
