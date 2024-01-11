@@ -40,7 +40,7 @@ classes = preprocesssing.get_class_names()
 model = image_classifer()
 # model.load_model(f"{cwd}/models","plantmodel.h5")
 model.load_model("models","plantmodel.h5") # for docker container
-image = "flower.jpg"
+image = "imageClassification/flower.jpg"
 img = preprocesssing.get_processsed_img(image,width,height)
 prediction = model.predict_model(img,classes)
 if type(prediction) == str:
