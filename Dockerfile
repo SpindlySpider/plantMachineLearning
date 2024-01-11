@@ -45,6 +45,8 @@ COPY . /app
 
 # Expose the port that the application listens on.
 EXPOSE 60424
+#add dependencies for open cv
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y 
 
 # Run the application.
 CMD ["python3","imageClassification/main.py"]
