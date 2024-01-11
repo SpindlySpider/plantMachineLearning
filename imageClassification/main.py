@@ -14,8 +14,6 @@ import os
 tf.config.threading.set_inter_op_parallelism_threads(112)
 
 
-
-
 # path = "../data"
 path = "data" # for docker container as cwd is app/
 height = 250
@@ -47,3 +45,6 @@ if type(prediction) == str:
     model.display_prediction(img,prediction)
 print(prediction)
     
+#keeps docker container alive
+while(True):
+    pass
