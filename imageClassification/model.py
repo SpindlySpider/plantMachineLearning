@@ -3,10 +3,12 @@ import matplotlib.pyplot as plt
 import os
 import numpy
 from PIL import Image
+import pickle
 class image_classifer():
     
-    def set_architecture(self,height,width,num_of_classes):
-        num_classes = num_of_classes
+    def set_architecture(self,height,width,classes):
+        self.classes = classes
+        num_classes = len(classes)
         data_augmentation = Sequential([
             layers.RandomFlip("horizontal",
                               input_shape=(height,width,3)),
@@ -78,21 +80,27 @@ class image_classifer():
         plt.title('Training and Validation Loss')
         plt.show()
     def save_model(self,path,filename):
-        path_filename = os.path.join(path,filename)        
-        self.model.save(path_filename)   
+        path_filename = os.path.join(path,filename)
+        f = open(f"{path_filename}.txt","wb")
+        pickle.dump(self.classes,f)#serlize classes to a file
+        f.close
+        self.model.save(f"{path_filename}".h5)   
     def load_model(self,path,filename):
-        path_filename = os.path.join(path,filename)       
-        self.model = models.load_model(path_filename)
-    def predict_model(self,img, class_names:list = None)-> str|list:
+        path_filename = os.path.join(path,filename)
+        f = open(f"{path_filename}.txt","rb")
+        self.classes = pickle.load(f)
+        f.close
+        self.model = models.load_model(f"{path_filename}.h5")
+    def predict_model(self,img)-> str|list:
         #img is of type numpy.ndarray, and only works for one image at the moment
         results = self.model.predict(img)
         first_img = results[0] # must change this so it supports multiple images
-        if class_names != None:
+        if self.classes != None:
             index = 0
             guess = max(first_img)
             for result in first_img:
                 if guess == result:
-                    prediction_label =class_names[index]
+                    prediction_label =self.classes[index]
                     return prediction_label
                 
                 else:
