@@ -2,6 +2,7 @@
 import tensorflow as tf
 from  DataInitliser import data_initliser
 from model import image_classifer
+import os
 
 #limmit memory use of the gpu, to prevent a out of memory error, GPU run out of VRAM
 # gpus = tf.config.list_physical_devices('GPU')
@@ -13,7 +14,10 @@ from model import image_classifer
 tf.config.threading.set_inter_op_parallelism_threads(112)
 
 
-path = "..\data"
+
+
+# path = "../data"
+path = "data" # for docker container as cwd is app/
 height = 250
 width = 250
 
@@ -34,7 +38,8 @@ classes = preprocesssing.get_class_names()
 # model.visulize_results()
 # model.save_model("..\models","plantmodel.h5")
 model = image_classifer()
-model.load_model("..\models","plantmodel.h5")
+# model.load_model(f"{cwd}/models","plantmodel.h5")
+model.load_model("models","plantmodel.h5") # for docker container
 image = "flower.jpg"
 img = preprocesssing.get_processsed_img(image,width,height)
 prediction = model.predict_model(img,classes)
