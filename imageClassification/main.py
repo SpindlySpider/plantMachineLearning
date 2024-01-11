@@ -5,11 +5,12 @@ from model import image_classifer
 import os
 
 #limmit memory use of the gpu, to prevent a out of memory error, GPU run out of VRAM
-# gpus = tf.config.list_physical_devices('GPU')
-# for gpu in gpus:
-#     tf.config.experimental.set_memory_growth(gpu, True)
-# print("Num GPUs Available: ", len(gpus))
+gpus = tf.config.list_physical_devices('GPU')
+for gpu in gpus:
+    tf.config.experimental.set_memory_growth(gpu, True)
+print("Num GPUs Available: ", len(gpus))
 #cant be used on windows as support ended in 2.10
+#unless you use wsl2, and pass it through a docker container
 
 tf.config.threading.set_inter_op_parallelism_threads(112)
 
