@@ -6,7 +6,7 @@ from PIL import Image
 
 
 def image_cleanup(data_dir, width, height):
-    vaild_extention = ["jpeg", "jpg", "png"]
+    vaild_extention = ["jpeg", "jpg","bmp", "png"]
     for folder in os.listdir(data_dir):
         folder_path = os.path.join(data_dir, folder)
         for image in os.listdir(folder_path):
