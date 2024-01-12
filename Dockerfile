@@ -16,7 +16,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
-
+RUN mkdir /app/docker_data
 # Create a non-privileged user that the app will run under.
 # See https://docs.docker.com/go/dockerfile-user-best-practices/
 ARG UID=10001
@@ -45,8 +45,8 @@ COPY . /app
 
 # Expose the port that the application listens on.
 EXPOSE 60424
-#add dependencies for open cv
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y 
+
 
 # Run the application.
 CMD ["python3","imageClassification/main.py"]
+# CMD ["python3","-m","jupyter","notebook"]
