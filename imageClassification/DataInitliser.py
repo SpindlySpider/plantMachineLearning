@@ -7,7 +7,7 @@ from PIL import Image
 class data_initliser():
     """this class is used for preparing and loading data from a directory"""
     def __init__(self,vaildation_split:float = 0.2,seed:int = numpy.random.randint(1,10000)):
-        # note we handle image colour standardization in the actual model not here
+        # note we handle image colour standardization in the actual model not here with a rescaling layer
         self.seed = seed
         self.vaildation_split = vaildation_split
     
@@ -18,7 +18,6 @@ class data_initliser():
         self.img_path = path
     
     def get_processsed_img(self,path,width,height) -> numpy.ndarray:
-        
         img = Image.open(path)
         img =img.resize((width,height))
         array_img = numpy.expand_dims(img,0) # resize it so it can be used in prediction/ training
