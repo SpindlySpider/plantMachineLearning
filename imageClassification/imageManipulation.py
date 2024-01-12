@@ -10,11 +10,11 @@ def image_cleanup(data_dir):
         for image in os.listdir(folder_path):
             image_path = os.path.join(folder_path,image)
             try:
-                attempt_image_open = cv2.imread(image_path) # attempts to open file
+                attempt_image_open = cv2.imread(image_path)  # attempts to open file
                 extention = imghdr.what(image_path) # retrives file type
                 if extention not in vaild_extention:
                     print(f"file : {image} is not of vaild file type ({vaild_extention})")
                     os.remove(image_path)
             except Exception as e:
                 print(f"exception: {e} \n raised on image: {image} in {folder_path}")
-
+                os.remove(image_path)
