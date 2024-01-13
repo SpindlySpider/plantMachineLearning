@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+    
+<script src="../static/js/app.js"></script>
+    
+    <h1>plant identifer</h1>
+    <p>this website is used to identify 16 differnt types of plants. <br> Input a image and the AI will do its best to identify it </p>
+    <form>
+        <input id="file_selector" type="file" accept=".jpg" onchange="display_image(event)">
+        <button id="upload_button" type = "submit">upload photo</button>
+        
+    </form>
+    <button id="predict_button" type = "submit">predict!</button>
+    <div class="flower_display">
+
+        <h1 id="prediction"></h1>
+        <img src="{{url_for('static', filename="test/flower.jpg")}}" id="flower_image" alt="Selected Image" width="500px" height="500px" >
+
+    </div>
+</body>
+<script src="static/js/socket.io.js"></script>
+<script src="static/js/app.js"></script>
+<link rel="stylesheet" href="../static/css/style.css">
+</html> 
