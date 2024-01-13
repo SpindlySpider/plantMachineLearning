@@ -3,10 +3,10 @@ from flask_socketio import SocketIO
 import sys
 import threading
 
-# UPLOAD_FOLDER = '/app/docker_data' #the upload folder for recived files
-# ai_module_path = "/app/imageClassification" # modules for docker
-ai_module_path = "imageClassification"
-UPLOAD_FOLDER = 'test'
+UPLOAD_FOLDER = '/app/docker_data' #the upload folder for recived files
+ai_module_path = "/app/imageClassification" # modules for docker
+# ai_module_path = "imageClassification"
+# UPLOAD_FOLDER = 'test'
 model_name = "test"
 image_name = "flower.jpg"
 width = 250
@@ -46,4 +46,4 @@ def do_prediction(UPLOAD_FOLDER, model_name, image_filepath, width, height):
     socketio.emit("prediction",{"data":f"{prediction}"})
     
     
-socketio.run(app=app,host='0.0.0.0', port=5000, debug=True)
+socketio.run(app=app, host='0.0.0.0',allow_unsafe_werkzeug=True,port=5000)
