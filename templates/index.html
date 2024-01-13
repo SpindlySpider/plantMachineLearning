@@ -18,7 +18,8 @@
     <div class="flower_display">
 
         <h1 id="prediction"></h1>
-        <img src="{{url_for('static', filename="test/flower.jpg")}}" id="flower_image" alt="Selected Image" width="500px" height="500px" >
+        {% comment %} <img src="{{url_for('static', filename="test/flower.jpg")}}" id="flower_image" alt="Selected Image" width="500px" height="500px" > {% endcomment %}
+        <img src="{{url_for('static', filename="/app/docker_data/flower.jpg")}}" id="flower_image" alt="Selected Image" width="500px" height="500px" >
 
     </div>
 </body>
