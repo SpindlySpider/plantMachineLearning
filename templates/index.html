@@ -6,21 +6,30 @@
 <body>
     
 <script src="../static/js/app.js"></script>
+    <div class="main">
+        <div class="head_info">
+
+            <h1 class="text">plant identifer</h1>
+            <p class="text">this website is used to identify 16 differnt types of plants. <br> Input a image and the AI will do its best to identify it </p>
+            <form >
+                <input id="file_selector" type="file" accept=".jpg" onchange="display_image(event)" class="text">
+                <button id="upload_button" type = "submit" class="button-18" >upload photo</button>
+                
+            </form>
+            <button id="predict_button" type = "submit" class="button-18">predict!</button>
+        </div>
+
+        <div class="flower_display">
     
-    <h1>plant identifer</h1>
-    <p>this website is used to identify 16 differnt types of plants. <br> Input a image and the AI will do its best to identify it </p>
-    <form>
-        <input id="file_selector" type="file" accept=".jpg" onchange="display_image(event)">
-        <button id="upload_button" type = "submit">upload photo</button>
-        
-    </form>
-    <button id="predict_button" type = "submit">predict!</button>
-    <div class="flower_display">
-
-        <h1 id="prediction"></h1>
-        {% comment %} <img src="{{url_for('static', filename="test/flower.jpg")}}" id="flower_image" alt="Selected Image" width="500px" height="500px" > {% endcomment %}
-        <img src="{{url_for('static', filename="/app/docker_data/flower.jpg")}}" id="flower_image" alt="Selected Image" width="500px" height="500px" >
-
+            <h1 class="text" id="prediction"></h1>
+            
+            <img src="../test/flower.jpg"" id="flower_image" alt="Selected Image" width="300px" height="300px" >
+            <!--
+                <img src="{{url_for('static', filename="/app/docker_data/flower.jpg")}}" id="flower_image" alt="Selected Image" width="500px" height="500px" > {% endcomment %}
+                
+            --> 
+    
+        </div>
     </div>
 </body>
 <script src="static/js/socket.io.js"></script>
