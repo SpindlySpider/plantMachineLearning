@@ -44,9 +44,9 @@ USER appuser
 COPY . /app
 
 # Expose the port that the application listens on.
-EXPOSE 60424
+EXPOSE 5000
 
 
 # Run the application.
-CMD ["python3","imageClassification/main.py"]
+CMD ["python3", "-m" , "flask", "run","--host=0.0.0.0"]
 # CMD ["python3","-m","jupyter","notebook"]
