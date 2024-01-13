@@ -35,14 +35,16 @@ def train_model(data_dir,model_save_dir,filename,epochs):
     model.visulize_results(model_save_dir)
     model.save_model(model_save_dir,filename)
     
-def predict_image(model_dir,filename,image_path,width,height):
+def predict_image(model_dir,model_filename,image_path,width,height):
     """predicts the type of flower, only supports one image"""
     model = image_classifer()
-    model.load_model(model_dir,filename)
+    model.load_model(model_dir,model_filename)
     img = data_initliser().get_processsed_img(image_path,width,height)
     prediction = model.predict_model(img)
     if type(prediction) == str:
-        model.display_prediction(img,prediction)
+        # model.display_prediction(img,prediction)
+        return prediction
     print(prediction)
+    return prediction
 
     
