@@ -1,6 +1,7 @@
 from flask import Flask , render_template
 from flask_socketio import SocketIO
 import sys
+import threading
 
 # UPLOAD_FOLDER = '/app/docker_data' #the upload folder for recived files
 # ai_module_path = "/app/imageClassification" # modules for docker
@@ -33,10 +34,16 @@ def handle_upload(message):
         print(e)
         
 @socketio.on('predict')
-def handle_predict():  # Rename the function to handle_predict
+def handle_predict(): 
+    thread = threading.Thread(target=do_prediction,args=(UPLOAD_FOLDER, model_name, image_filepath, width, height)) 
+    thread.start()
+    thread.join()
+
+def do_prediction(UPLOAD_FOLDER, model_name, image_filepath, width, height):
+    """this is ment to be run on a thread to send the client a prediction"""
     prediction=predict_image(UPLOAD_FOLDER, model_name, image_filepath, width, height)
     print(prediction)
     socketio.emit("prediction",{"data":f"{prediction}"})
-
-
+    
+    
 socketio.run(app=app,host='0.0.0.0', port=5000, debug=True)
