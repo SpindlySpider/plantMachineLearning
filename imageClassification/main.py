@@ -10,14 +10,14 @@ width = 250
 epochs = 15
 image_path = "docker_data/flower.jpg"
 
-enable_gpu()
+# enable_gpu()
 # clean_images(data_dir,height,width)
 # train_model(data_dir,docker_volume,filename,epochs)
-predict_image(docker_volume,filename,image_path,width,height)
+# predict_image(docker_volume,filename,image_path,width,height)
 
 
 
 
-#keeps docker container alive
-# while(True):
-#     pass
+# keeps docker container alive
+while(True):
+    pass
